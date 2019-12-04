@@ -14,7 +14,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       password_hash: {
         type: Sequelize.STRING,
@@ -24,6 +23,9 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+      },
+      deleted_at: {
+        type: Sequelize.DATE,
       },
       created_at: {
         type: Sequelize.DATE,

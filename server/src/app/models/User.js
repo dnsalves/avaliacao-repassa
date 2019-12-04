@@ -10,6 +10,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         passwordHash: Sequelize.STRING,
         isAdmin: Sequelize.BOOLEAN,
+        deletedAt: Sequelize.DATE,
       },
       { sequelize }
     );

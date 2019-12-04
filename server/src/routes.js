@@ -12,7 +12,9 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.put('/users', UserController.update);
+routes.put('/users/:id', UserController.update);
+routes.get('/users', UserController.index);
+routes.delete('/users/:id', UserController.delete);
 // routes.get('/Report', UserController.index);
 
 export default routes;
