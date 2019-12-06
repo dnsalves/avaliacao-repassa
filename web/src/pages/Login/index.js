@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { FaSignInAlt } from 'react-icons/fa';
 
+import Title from '../../components/Title'
 import api from '../../services/api';
 import history from '../../services/history'
 
@@ -37,7 +38,7 @@ export default class Login extends Component {
   render(){
     return (
       <Container>
-        <h1>Welcome to Repassa</h1>
+        <Title text="Welcome to Repassa" />
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Insert your e-mail" onChange={this.handleEmail} />
           <input type="password" placeholder="Insert your password" onChange={this.handlePassword} />

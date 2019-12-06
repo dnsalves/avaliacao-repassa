@@ -4,7 +4,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import api from '../../services/api'
 import history from '../../services/history'
 
-// import Title from '../../components/Title';
+import Title from '../../components/Title';
 import { Container, SubmitButton } from './styles';
 
 export default class Login extends Component{
@@ -35,7 +35,7 @@ export default class Login extends Component{
     e.preventDefault()
     const request = await api.post('/users', this.state);
     if (request.status === 200) {
-      history.push('/')
+      history.push('/Dashboard')
     }else{
       alert('Erro ao cadastrar')
     }
@@ -45,7 +45,7 @@ export default class Login extends Component{
 
     return (
       <Container>
-        <h1>Register a User</h1>
+        <Title text="Register a User" />
         <form onSubmit={this.handleSubmit}>
           <input type="text" placeholder="Insert your name" onChange={this.handleName} />
           <input type="text" placeholder="Insert your e-mail" onChange={this.handleEmail} />
