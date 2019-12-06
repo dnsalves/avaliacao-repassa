@@ -7,7 +7,7 @@ import history from '../../services/history';
 import { Container } from './styles';
 
 export default function Dashboard() {
-  const isAdmin = localStorage.getItem('userIsAdmin');
+  const isAdmin = !localStorage.getItem('userIsAdmin');
   const addUsers = isAdmin ? (
     <Button text="Add Users" click={() => history.push('/Register')} />
   ) : null;
@@ -18,6 +18,7 @@ export default function Dashboard() {
   return (
     <Container>
       <Title text="Where do you going?" />
+      <Button text="See Reviews" click={() => history.push('/Reviews')} />
       {addUsers}
       {showUsers}
     </Container>

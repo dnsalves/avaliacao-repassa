@@ -31,7 +31,7 @@ export default class Login extends Component {
       localStorage.setItem('userId', request.data.user.id);
       localStorage.setItem('userIsAdmin', request.data.user.isAdmin);
 
-      history.push('/Register');
+      history.push('/Dashboard');
     }
   }
 

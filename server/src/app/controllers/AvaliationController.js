@@ -6,12 +6,12 @@ class AvaliationController {
     const { employeeId } = req.params;
     const { userId, isAdmin } = req;
 
-    if (userId !== employeeId && !isAdmin) {
+    if (userId !== +employeeId && !isAdmin) {
       return res.status(401).json({ error: 'Not allowed to see this review!' });
     }
 
     const avaliation = await Avaliation.findAll({
-      where: { employeeId, deletedAt: { $ne: null } },
+      where: { employeeId, deletedAt: null },
     });
 
     return res.json(avaliation);
