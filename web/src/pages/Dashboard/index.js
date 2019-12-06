@@ -7,7 +7,7 @@ import history from '../../services/history';
 import { Container } from './styles';
 
 export default function Dashboard() {
-  const isAdmin = !localStorage.getItem('userIsAdmin');
+  const isAdmin = localStorage.getItem('userIsAdmin') === 'true';
   const addUsers = isAdmin ? (
     <Button text="Add Users" click={() => history.push('/Register')} />
   ) : null;
