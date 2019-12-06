@@ -1,18 +1,17 @@
 import React from 'react';
-import { Switch, BrowserRouter } from 'react-router-dom';
-import Route from './Route';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
-import Login from '../pages/Login';
 import Register from '../pages/Register';
-import Employees from '../pages/Employees';
+import Login from '../pages/Login';
+import User from '../pages/User';
 
 export default function routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
-        <Route path="/Register" exact component={Register} />
-        <Route path="/Dashboard" exact component={Employees} isPrivate />
+        <Route path="/Register" component={Register} />
+        <Route path="/Users" component={User} />
       </Switch>
     </BrowserRouter>
   );

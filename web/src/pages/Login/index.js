@@ -1,32 +1,52 @@
-import React from 'react';
-import { FaSignInAlt } from 'react-icons/fa';
-import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import React, { Component } from 'react';
 
-import Title from '../../components/Title';
+import { FaSignInAlt } from 'react-icons/fa';
+
+import api from '../../services/api';
+import history from '../../services/history'
+
 import { Container, SubmitButton } from './styles';
 
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insert a valid e-mail')
-    .required('E-mail is required'),
-  password: Yup.string().required('Password is required'),
-});
+export default class Login extends Component {
+  state = {
+    email: '',
+    password: ''
+  }
 
-export default function Login() {
-  function handleSubmit(data) {}
+  handleEmail = e =>{
+    this.setState({email: e.target.value})
+  }
 
-  return (
-    <Container>
-      <Title text="Welcome to Repassa" />
-      <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="email" type="text" placeholder="Digite seu e-mail" />
-        <Input name="password" type="password" placeholder="Digite sua senha" />
-        <SubmitButton>
-          Sign In
-          <FaSignInAlt />
-        </SubmitButton>
-      </Form>
-    </Container>
-  );
+  handlePassword = e =>{
+    this.setState({password: e.target.value})
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault();
+    const { email, password } = this.state
+    const request = await api.post('/sessions', { email, password });
+    if (request.status === 200) {
+      localStorage.setItem('authorization', request.data.token);
+      localStorage.setItem('userId', request.data.user.id);
+      localStorage.setItem('userIsAdmin', request.data.user.isAdmin);
+
+      history.push('/Register');
+    }
+  }
+
+  render(){
+    return (
+      <Container>
+        <h1>Welcome to Repassa</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Insert your e-mail" onChange={this.handleEmail} />
+          <input type="password" placeholder="Insert your password" onChange={this.handlePassword} />
+          <SubmitButton>
+            Sign In
+            <FaSignInAlt />
+          </SubmitButton>
+        </form>
+      </Container>
+    );
+  }
 }

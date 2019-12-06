@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import AvaliationController from './app/controllers/AvaliationController';
 
 import authMiddleware from './app/middleware/auth';
 
@@ -15,6 +16,9 @@ routes.use(authMiddleware);
 routes.put('/users/:id', UserController.update);
 routes.get('/users', UserController.index);
 routes.delete('/users/:id', UserController.delete);
-// routes.get('/Report', UserController.index);
+
+routes.get('/avaliations/:employeeId', AvaliationController.index);
+routes.post('/avaliations/:employeeId', AvaliationController.store);
+routes.put('/avaliations/:id', AvaliationController.update);
 
 export default routes;

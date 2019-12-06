@@ -1,43 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
-import { Form, Input, Check } from '@rocketseat/unform';
-import * as Yup from 'yup';
 
-import Title from '../../components/Title';
+import api from '../../services/api'
+import history from '../../services/history'
+
+// import Title from '../../components/Title';
 import { Container, SubmitButton } from './styles';
 
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insert a valid e-mail')
-    .required('E-mail is required'),
-  name: Yup.string().required(),
-  password: Yup.string()
-    .min(6, 'Minimum 6 chars')
-    .required('Password is required'),
-});
+export default class Login extends Component{
+  state = {
+    name:'',
+    email: '',
+    password: '',
+    isAdmin: false
+  }
 
-export default function Login() {
-  function handleSubmit(data) {}
+  handleName = e =>{
+    this.setState({name: e.target.value})
+  }
 
-  return (
-    <Container>
-      <Title text="Welcome to Repassa" />
-      <Form schema={schema} onSubmit={handleSubmit}>
-        <Input name="name" type="text" placeholder="Insert your name" />
-        <Input name="email" type="text" placeholder="Insert your e-mail" />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Insert your password"
-        />
-        <span className="admin">
-          <Check name="isAdmin" label="admin?" />
-        </span>
-        <SubmitButton>
-          Sign In
-          <FaSignInAlt />
-        </SubmitButton>
-      </Form>
-    </Container>
-  );
+  handleEmail = e =>{
+    this.setState({email: e.target.value})
+  }
+
+  handlePassword = e =>{
+    this.setState({password: e.target.value})
+  }
+
+  handleAdmin = e =>{
+    this.setState({isAdmin: e.target.checked})
+  }
+
+  handleSubmit = async e =>{
+    e.preventDefault()
+    const request = await api.post('/users', this.state);
+    if (request.status === 200) {
+      history.push('/')
+    }else{
+      alert('Erro ao cadastrar')
+    }
+  }
+
+  render(){
+
+    return (
+      <Container>
+        <h1>Register a User</h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" placeholder="Insert your name" onChange={this.handleName} />
+          <input type="text" placeholder="Insert your e-mail" onChange={this.handleEmail} />
+          <input type="password" placeholder="Insert your password" onChange={this.handlePassword} />
+          <span className="admin">
+            <input type="checkbox" onClick={this.handleAdmin} /> Admin?
+          </span>
+          <SubmitButton>
+            Sign In
+            <FaSignInAlt />
+          </SubmitButton>
+        </form>
+      </Container>
+    )
+  }
+
 }
