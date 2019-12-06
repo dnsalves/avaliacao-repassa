@@ -80,12 +80,12 @@ class UserController {
     const userExists = await User.findOne({
       where: {
         id: req.params.id,
-        deletedAt: { $ne: null },
+        deletedAt: null,
       },
     });
 
     if (!userExists) {
-      return res.json({ error: 'User does not exists' });
+      return res.status(400).json({ error: 'User does not exists' });
     }
 
     await User.update(
