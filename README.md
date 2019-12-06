@@ -20,5 +20,6 @@
     <li>Acesse a pasta web</li>
     <li>Execute o script 'start' (yarn start ou npm run start)</li>
     <li>Acesse o navegador atraves da URL http://localhost:3000</li>
+    <li>O usuário/senha padrão deve ser criado através do seed (admin@repassa.com.br/123456)</li>
   </ul>
 </p>
