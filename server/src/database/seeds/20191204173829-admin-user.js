@@ -6,7 +6,7 @@ module.exports = {
       'users',
       [
         {
-          name: 'Administrador',
+          name: 'Administrator',
           email: 'admin@repassa.com.br',
           password_hash: bcrypt.hashSync('123456', 8),
           is_admin: true,

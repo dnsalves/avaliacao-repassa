@@ -35,6 +35,7 @@ export default class User extends Component {
 
   render() {
     const { users } = this.state;
+
     if (users.length > 0) {
       return (
         <Container>

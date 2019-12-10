@@ -11,4 +11,7 @@ module.exports = {
     underscored: true,
     underscoredAll: true,
   },
+  dialectOptions: {
+    ssl: process.env.POSTGRES_SSL === 'true',
+  },
 };

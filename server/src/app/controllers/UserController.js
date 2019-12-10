@@ -72,7 +72,7 @@ class UserController {
     if (id) {
       const users = await User.findOne({
         where: { deletedAt: null, id },
-        attributes: ['id', 'name', 'isAdmin'],
+        attributes: ['id', 'name', 'email', 'isAdmin'],
       });
       return res.json(users);
     }
