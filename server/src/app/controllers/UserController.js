@@ -67,11 +67,20 @@ class UserController {
 
   /* --------------------- INDEX --------------------- */
   async index(req, res) {
+    const { id } = req.params;
+
+    if (id) {
+      const users = await User.findOne({
+        where: { deletedAt: null, id },
+        attributes: ['id', 'name', 'isAdmin'],
+      });
+      return res.json(users);
+    }
+
     const users = await User.findAll({
       where: { deletedAt: null },
       attributes: ['id', 'name', 'isAdmin'],
     });
-
     return res.json(users);
   }
 
